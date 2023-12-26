@@ -1,0 +1,52 @@
+
+EXPLANATION:
+Explanation of additional annotations:
+
+[StringLength]: Specifies the maximum and minimum length of a string property.
+[Range]: Specifies the range constraints for numeric properties.
+[EmailAddress]: Validates that the property value is a valid email address.
+[Phone]: Validates that the property value is a valid phone number.
+[DataType(DataType.Password)]: Informs the UI that this property should be treated as a password.
+[RegularExpression]: Validates that the property value matches a specified regular expression. In this case, it enforces password complexity.
+
+
+
+Let's start(By Muhammad Shahbaz Ali).
+
+using System.ComponentModel.DataAnnotations;
+
+namespace coreProject2.Models
+{
+    public class UserTbl
+    {
+        [Key]
+        public int id { get; set; }
+
+        [Required(ErrorMessage = "Name is required.")]
+        [StringLength(100, MinimumLength = 3, ErrorMessage = "Name must be between 2 and 100 characters.")]
+        public string name { get; set; }
+
+        [Required(ErrorMessage = "Gender is required.")]
+        public string gender { get; set; }
+
+        [Required(ErrorMessage = "Age is required.")]
+        [Range(18, 99, ErrorMessage = "Age must be between 18 and 99.")]
+        public string age { get; set; }
+
+        [Required(ErrorMessage = "Correct Email is required.")]
+        [EmailAddress(ErrorMessage = "Invalid email address.")]
+        public string email { get; set; }
+
+        [Required(ErrorMessage = "Password is required.")]
+        [DataType(DataType.Password)]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$", ErrorMessage = "Password must meet complexity requirements.")]
+        public string password { get; set; }
+
+        [Required(ErrorMessage = "Phone number is required.")]
+        [Phone(ErrorMessage = "Invalid phone number.")]
+        public string PhoneNo { get; set; }
+    }
+}
+
+
+
